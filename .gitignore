@@ -1,0 +1,12 @@
+# Build output (Netlify builds this from src/ on deploy)
+dist/
+
+# Dependencies / tooling
+node_modules/
+npm-debug.log*
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
