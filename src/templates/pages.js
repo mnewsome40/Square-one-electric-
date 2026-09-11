@@ -29,7 +29,7 @@ function home({ services }) {
       (s) => `
       <article class="card">
         <div class="card__icon">${icon(s.card.icon)}</div>
-        <h4>${esc(s.card.title)}</h4>
+        <h3 class="card__title type-h4">${esc(s.card.title)}</h3>
         <p>${esc(s.card.text)}</p>
         <a class="card__link" href="/${s.slug}">Learn More ➔</a>
       </article>`
@@ -53,14 +53,15 @@ function home({ services }) {
   </div>
 </section>
 
-<section class="card-row" aria-label="Featured services">
+<section class="card-row" aria-labelledby="featured-title">
+  <h2 id="featured-title" class="visually-hidden">Our Services</h2>
   ${cards}
 </section>
 
 <section class="intro-band">
   <div class="container">
-    <h5>Excellence in Every Connection</h5>
-    <h6>Trustworthy service you can count on</h6>
+    <h2 class="type-h5">Excellence in Every Connection</h2>
+    <p class="type-h6">Trustworthy service you can count on</p>
   </div>
 </section>
 
@@ -70,8 +71,8 @@ ${wave(true)}
   <div class="container">
     <p class="display-title">Wired For Life.</p>
     <div class="story__text">
-      <h3 id="story-title">Power Your Home with Precision</h3>
-      <h4>Call Our Electrician Serving the Memphis Metro Area</h4>
+      <h2 id="story-title" class="type-h3">Power Your Home with Precision</h2>
+      <h3 class="type-h4">Call Our Electrician Serving the Memphis Metro Area</h3>
       <p>When you need electrical work in Bartlett, Memphis, and the surrounding areas, you're looking for an electrician that combines expertise with reliability. At Square One Electric, we bring over 30 years of industry experience to every electrical service. Whether you're in the heart of the city or in the surrounding areas, our electricians are ready to assist with both residential and commercial needs. We focus on integrity, safety, and providing top-notch service to ensure your electrical systems run smoothly.</p>
       <p>Our services range from wiring and panel upgrades to <a href="/ev-chargers-installation">EV charger installations</a> and troubleshooting. We understand the importance of timely and clean work, which is why we offer free estimates, emergency services, and warranties on our projects. Licensed and insured, our team is known for its professional approach and has earned a 5.0-star rating from satisfied clients.</p>
       <p><a href="/contact-us">Contact us</a> today to schedule your service and ensure your electrical systems are in expert hands.</p>
@@ -89,8 +90,8 @@ ${wave(false)}
   <div class="container">
     <div class="split-block">
       <div>
-        <h3 id="popular-title">Our Most Popular Services</h3>
-        <h4>Our commitment to excellence is reflected in the wide range of services we offer.</h4>
+        <h2 id="popular-title" class="type-h3">Our Most Popular Services</h2>
+        <h3 class="type-h4">Our commitment to excellence is reflected in the wide range of services we offer.</h3>
       </div>
       <div>
         <p>From home inspection corrections to industrial equipment connections, we cover all your electrical needs. Our skilled team ensures that every project is completed with precision and care. Here’s what we provide:</p>
@@ -103,7 +104,7 @@ ${wave(false)}
 
 <section class="why" aria-labelledby="why-title">
   <div class="container">
-    <h3 id="why-title">Why <span class="caps">Square One Electric</span></h3>
+    <h2 id="why-title">Why <span class="caps">Square One Electric</span></h2>
     <p>Square One Electric is proud to serve the greater Memphis area and its vibrant community. The local culture and landmarks inspire us to deliver exceptional service. Our approach is centered on integrity and customer satisfaction, ensuring every interaction is positive and productive. We take pride in our ability to adapt to the unique needs of each client, providing solutions that are both effective and efficient.</p>
     <p>Our team is dedicated to maintaining the highest standards of safety and quality. With a focus on timely and professional work, we strive to exceed your expectations in every project.</p>
     <p>Reach out to us and discover how our values align with your needs for reliable electrical solutions.</p>
@@ -114,7 +115,7 @@ ${wave(true)}
 
 <section class="section--dark areas" aria-labelledby="areas-title">
   <div class="container">
-    <h3 id="areas-title">The Areas we serve</h3>
+    <h2 id="areas-title" class="type-h3">The Areas we serve</h2>
     <div class="map-embed">
       <iframe src="${esc(site.mapEmbed)}" title="Map of the Square One Electric service area around Memphis, Tennessee" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
     </div>
@@ -203,7 +204,7 @@ function areasIndex({ areas }) {
       (a) => `
       <article class="area-card">
         <div class="area-card__image"><img src="/assets/images/areas-card-bg.jpg" alt="" width="1600" height="1000" loading="lazy"></div>
-        <h3>${esc(a.city)}</h3>
+        <h2>${esc(a.city)}</h2>
         <a class="btn btn--sm" href="/service-areas/${a.slug}" aria-label="Learn more about electrical services in ${esc(a.city)}">Learn More</a>
       </article>`
     )
@@ -274,7 +275,7 @@ function faq(data) {
     .map(
       (f) => `
       <details class="faq-item">
-        <summary><h3>${esc(f.q)}</h3></summary>
+        <summary><h2>${esc(f.q)}</h2></summary>
         <div class="faq-answer"><p>${linkPhones(f.a)}</p></div>
       </details>`
     )
