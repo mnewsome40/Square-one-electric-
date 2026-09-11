@@ -67,6 +67,17 @@ Requires Node 18 or newer. Nothing to install.
 
 Manual alternative: run `npm run build` locally and drag the `dist/` folder into Netlify's deploy drop zone.
 
+### About the page URLs
+
+Each page is written as a directory index (`dist/contact-us/index.html`), and every
+canonical tag, sitemap entry, and internal link uses the trailing-slash form
+(`/contact-us/`). This matches how Netlify serves the site: its **Pretty URLs**
+setting, on by default, normalises every request to the trailing-slash form, so
+`/contact-us` returns a 301 to `/contact-us/`. Declaring the same form the server
+returns keeps the canonical tags honest and avoids a redirect hop on internal
+navigation. The old non-slash URLs still work and redirect, so existing inbound
+links to the Duda site keep their value.
+
 ## Notes for the site owner
 
 These items were carried over exactly as they appear on the live site and may deserve a look:

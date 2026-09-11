@@ -5,6 +5,32 @@ const fs = require('fs');
 const path = require('path');
 const site = require('../data/site');
 
+/**
+ * Canonical form of an internal page path.
+ *
+ * Netlify's "Pretty URLs" (on by default) normalises every request to the
+ * trailing-slash form, so "/contact-us" is served as a 301 to "/contact-us/".
+ * Declaring the trailing-slash form everywhere keeps canonical tags, the
+ * sitemap and internal links pointing at the URL that actually serves the
+ * page, and it still resolves if Pretty URLs is ever turned off, because the
+ * build writes directory indexes.
+ *
+ * Paths whose last segment contains a dot are files (/css/styles.css,
+ * /assets/images/logo.jpg) and are left alone.
+ */
+function pagePath(p) {
+  if (!p.startsWith('/') || p.startsWith('//')) return p;
+  if (p.endsWith('/')) return p;
+  const last = p.slice(p.lastIndexOf('/') + 1);
+  if (last === '' || last.includes('.')) return p;
+  return p + '/';
+}
+
+/** Rewrite internal href="/..." values in rendered HTML to their canonical form. */
+function normalizeHrefs(html) {
+  return html.replace(/href="(\/[^"#?]*)"/g, (m, p) => `href="${pagePath(p)}"`);
+}
+
 /** Escape text for safe insertion into HTML text nodes and attribute values. */
 function esc(value) {
   return String(value)
@@ -165,12 +191,12 @@ function businessJsonLd() {
  * @param {string} [opts.ogType]
  */
 function renderPage({ title, description, path: currentPath, content, bodyClass = '', jsonLd = [], extraHead = '', ogType = 'website' }) {
-  const canonical = site.url + (currentPath === '/' ? '/' : currentPath);
+  const canonical = site.url + pagePath(currentPath === '/' ? '/' : currentPath);
   const ld = [businessJsonLd(), ...jsonLd]
     .map((obj) => `<script type="application/ld+json">${JSON.stringify(obj).replace(/</g, '\\u003c')}</script>`)
     .join('\n');
 
-  return `<!DOCTYPE html>
+  return normalizeHrefs(`<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
@@ -208,7 +234,7 @@ ${footer()}
 <script src="/js/main.js" defer></script>
 </body>
 </html>
-`;
+`);
 }
 
-module.exports = { renderPage, esc, paragraphs, linkPhones, icon, site };
+module.exports = { renderPage, esc, paragraphs, linkPhones, icon, site, pagePath };

@@ -17,6 +17,7 @@ const faqs = require('./src/data/faqs');
 const posts = require('./src/data/posts');
 const policy = require('./src/data/policy');
 const pages = require('./src/templates/pages');
+const { pagePath } = require('./src/templates/layout');
 
 const ROOT = __dirname;
 const SRC = path.join(ROOT, 'src');
@@ -86,7 +87,7 @@ function build() {
   const urls = routes
     .map(
       (r) => `  <url>
-    <loc>${site.url}${r.path === '/' ? '' : r.path}</loc>
+    <loc>${site.url}${r.path === '/' ? '/' : pagePath(r.path)}</loc>
     <lastmod>${r.lastmod}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>${r.priority}</priority>
