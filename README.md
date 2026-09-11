@@ -20,6 +20,8 @@ Also generated: `sitemap.xml`, `robots.txt`, `404.html`, favicons, and LocalBusi
 
 Intentionally **not** included (per the brief): pop-ups, chat widgets, cookie banners, and other third-party scripts. The only external embeds are the Google map on the home page and the Jobber request form on the Contact page, both of which the original site uses.
 
+Fonts are self-hosted rather than loaded from Google Fonts, so the pages need no third-party request to render. Oswald and Montserrat ship as variable fonts, so one file per family covers both weights the design uses, and the latin-ext subset is only downloaded if a page actually contains a character from it.
+
 ## How it's built
 
 There are no npm dependencies. A small Node script renders the pages from content data and templates:
@@ -41,6 +43,7 @@ src/
   js/main.js             Mobile drawer, Services dropdown, FAQ accordion
   assets/images/         Optimised site images
   assets/icons/          Inline SVG icons from the original site
+  assets/fonts/          Self-hosted Oswald and Montserrat (woff2)
   public/                Favicons (copied to the site root)
 ```
 
