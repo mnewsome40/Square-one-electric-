@@ -1,6 +1,9 @@
 # Build output (Netlify builds this from src/ on deploy)
 dist/
 
+# Netlify CLI local state (links this working copy to a Netlify project)
+.netlify/
+
 # Dependencies / tooling
 node_modules/
 npm-debug.log*
