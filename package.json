@@ -5,6 +5,7 @@
   "private": true,
   "scripts": {
     "build": "node build.js",
+    "check": "node build.js && node check.js",
     "serve": "node serve.js",
     "start": "npm run build && npm run serve"
   },

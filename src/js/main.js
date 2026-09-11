@@ -93,8 +93,4 @@
       });
     });
   }
-
-  /* ---------- Current year in footer (falls back to the static text) ---------- */
-  var year = doc.querySelector('[data-year]');
-  if (year) year.textContent = new Date().getFullYear();
 })();

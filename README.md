@@ -28,6 +28,7 @@ There are no npm dependencies. A small Node script renders the pages from conten
 
 ```
 build.js                 Renders src/ → dist/ (pages, sitemap, robots, 404, static files)
+check.js                 Post-build checks: links, meta, headings, canonicals, sitemap
 serve.js                 Zero-dependency local preview server for dist/
 netlify.toml             Netlify build command, publish directory, cache/security headers
 src/
@@ -53,11 +54,18 @@ To change business details (phone, hours, address), edit `src/data/site.js`. To 
 
 ```bash
 npm run build     # renders the site into dist/
+npm run check     # builds, then checks the output (see below)
 npm run serve     # serves dist/ at http://localhost:8080
 npm start         # build + serve
 ```
 
 Requires Node 18 or newer. Nothing to install.
+
+`npm run check` catches the mistakes that are easy to make when editing content:
+a link or image pointing nowhere, two pages sharing a title or meta description,
+a page with no or several `<h1>`, a heading outline that skips a level, a
+canonical tag that does not match the page's own URL, and any page missing from
+the sitemap. It exits non-zero on failure, so it can gate a deploy.
 
 ## Deploying to Netlify
 

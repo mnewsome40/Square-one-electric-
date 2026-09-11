@@ -8,11 +8,37 @@
 [build.environment]
   NODE_VERSION = "20"
 
-# Long-lived caching for fingerprint-free static assets (images, icons).
+# Font files are specific binaries: replacing a typeface changes the filename,
+# so they are safe to cache for a year without revalidating.
 [[headers]]
-  for = "/assets/*"
+  for = "/assets/fonts/*"
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
+
+# Images and icons keep stable filenames, so a photo can be swapped in place.
+# A one-day cache keeps repeat visits fast while making sure a replacement
+# reaches visitors quickly instead of being pinned in their browser for a year.
+[[headers]]
+  for = "/assets/images/*"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"
+
+[[headers]]
+  for = "/assets/icons/*"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"
+
+# CSS and JS change with any content edit and are small; let the browser
+# revalidate so a deploy is picked up immediately.
+[[headers]]
+  for = "/css/*"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "/js/*"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
 
 [[headers]]
   for = "/*"
