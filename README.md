@@ -97,3 +97,4 @@ These items were carried over exactly as they appear on the live site and may de
 - **Blog posts** use a different phone number (901-409-1794) and the name "SQUARE ONE ELECTRIC LLC", while the rest of the site uses (901) 467-7607. Worth confirming which number should appear.
 - **Home page area list** includes "West Memphis, TN". West Memphis is in Arkansas.
 - **Contact form** is a Jobber embed tied to the existing Jobber account. If that account changes, update the IDs in `src/data/site.js`.
+- **One typo was corrected.** The Contact page heading reads "…in the memphis metro area today" on the live site. Because that heading is styled in capitals the mistake is invisible, but the underlying text now reads "Memphis Metro Area". Every other heading on the site already used title case. Nothing else in the copy was changed: a word-level comparison against the live pages confirms the rebuild carries all of the original body copy.
