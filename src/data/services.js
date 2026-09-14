@@ -130,6 +130,10 @@ module.exports = [
     paragraphs: [
       "Drive into the future with Square One Electric's EV charger installations in Bartlett, Memphis, and the surrounding areas. We offer comprehensive solutions for both commercial and residential EV charging setups, ensuring safe, code-compliant wiring and panel upgrades. Whether you need a Level 1 or Level 2 charger for your garage or a commercial solution for your business, our team is equipped to handle all your needs.",
       'Our services include integration with smart systems and energy management tools, providing you with ongoing support and maintenance for installed chargers. Enjoy the convenience of charging your electric vehicle at home or work, knowing your setup is safe and efficient. Join the green revolution with our EV charger installations.',
+      {
+        html:
+          'Charging a Tesla or another EV at home? Our <a href="/ev-tesla-charger-installation">Tesla and EV charging page</a> walks through what a Level 2 install involves, what the Wall Connector needs, and what happens when the panel is already full.',
+      },
       'Secure your EV charger installation and drive with confidence.',
     ],
     image: {

@@ -22,7 +22,7 @@ function button(label, href, extraClass = '') {
 
 /* ---------- Home ---------- */
 
-function home({ services }) {
+function home({ services, ev }) {
   const cards = services
     .filter((s) => s.card)
     .map(
@@ -98,6 +98,20 @@ ${wave(false)}
         <ul>${serviceLinks}</ul>
         <p>Schedule your service today to experience the difference our expertise can make.</p>
       </div>
+    </div>
+  </div>
+</section>
+
+<section class="ev-highlight" aria-labelledby="ev-highlight-title">
+  <div class="container">
+    <div class="ev-highlight__text">
+      <h2 id="ev-highlight-title" class="type-h3">${esc(ev.home.heading)}</h2>
+      <h3 class="type-h4">${esc(ev.home.subheading)}</h3>
+      ${paragraphs(ev.home.paragraphs)}
+      ${button(ev.home.linkLabel, `/${ev.slug}`)}
+    </div>
+    <div class="ev-highlight__image">
+      <img src="${ev.home.image.src}" alt="${esc(ev.home.image.alt)}" width="${ev.home.image.width}" height="${ev.home.image.height}" loading="lazy">
     </div>
   </div>
 </section>
@@ -453,6 +467,147 @@ function post(p, { older, newer }) {
   });
 }
 
+/* ---------- Tesla / EV charging (dedicated page) ---------- */
+
+function evCharging(ev) {
+  const steps = ev.steps
+    .map((s) => `<li><strong>${esc(s.lead)}</strong> ${esc(s.text)}</li>`)
+    .join('\n      ');
+
+  const equipment = ev.equipment
+    .map((s) => `<li><strong>${esc(s.lead)}</strong> ${esc(s.text)}</li>`)
+    .join('\n      ');
+
+  const figures = ev.gallery
+    .map(
+      (g) => `
+      <figure class="ev-figure">
+        <img src="${g.src}" alt="${esc(g.alt)}" width="${g.width}" height="${g.height}" loading="lazy">
+        <figcaption>${esc(g.caption)}</figcaption>
+      </figure>`
+    )
+    .join('');
+
+  const panelOptions = ev.panelOptions.map((o) => `<li>${esc(o)}</li>`).join('\n      ');
+
+  const faqItems = ev.faqs
+    .map(
+      (f) => `
+      <details class="faq-item">
+        <summary><h3>${esc(f.q)}</h3></summary>
+        <div class="faq-answer"><p>${linkPhones(f.a)}</p></div>
+      </details>`
+    )
+    .join('');
+
+  const content = `
+<section class="page-hero page-hero--split">
+  <div class="container">
+    <div class="page-hero__text">
+      <h1>${esc(ev.h1)}</h1>
+      <h2>${esc(ev.h2)}</h2>
+      ${paragraphs(ev.intro)}
+      ${button('Request Service', '/contact-us')}
+    </div>
+    <div class="page-hero__image">
+      <img src="${ev.heroImage.src}" alt="${esc(ev.heroImage.alt)}" width="${ev.heroImage.width}" height="${ev.heroImage.height}">
+    </div>
+  </div>
+</section>
+
+${wave(true)}
+
+<section class="section--dark ev-steps" aria-labelledby="ev-steps-title">
+  <div class="container">
+    <h2 id="ev-steps-title" class="type-h3">${esc(ev.stepsHeading)}</h2>
+    <p class="ev-steps__intro">${esc(ev.stepsIntro)}</p>
+    <ol class="ev-step-list">
+      ${steps}
+    </ol>
+  </div>
+</section>
+
+${wave(false)}
+
+<section class="ev-equipment" aria-labelledby="ev-equipment-title">
+  <div class="container prose">
+    <h2 id="ev-equipment-title" class="type-h3">${esc(ev.equipmentHeading)}</h2>
+    ${paragraphs(ev.equipmentIntro)}
+    <ul class="ev-list">
+      ${equipment}
+    </ul>
+  </div>
+</section>
+
+<section class="ev-gallery" aria-labelledby="ev-gallery-title">
+  <div class="container">
+    <h2 id="ev-gallery-title" class="type-h3">${esc(ev.galleryHeading)}</h2>
+    <div class="ev-gallery__grid">${figures}</div>
+  </div>
+</section>
+
+<section class="ev-panel" aria-labelledby="ev-panel-title">
+  <div class="container prose">
+    <h2 id="ev-panel-title" class="type-h3">${esc(ev.panelHeading)}</h2>
+    <p>${esc(ev.panelIntro)}</p>
+    <ul>
+      ${panelOptions}
+    </ul>
+    <p>${esc(ev.panelClosing)}</p>
+
+    <h2 class="type-h3">${esc(ev.commercialHeading)}</h2>
+    ${paragraphs(ev.commercial)}
+    <p>Charger work sits alongside the rest of what we do, from <a href="/ev-chargers-installation">EV charger installation</a> and panel upgrades to <a href="/industrial-equipment-connections">industrial equipment connections</a>. See the full list of <a href="/areas-we-serve">areas we serve</a>.</p>
+  </div>
+</section>
+
+<section class="ev-faq" aria-labelledby="ev-faq-title">
+  <div class="container">
+    <h2 id="ev-faq-title" class="type-h3">${esc(ev.faqHeading)}</h2>
+    <div class="faq-list">${faqItems}</div>
+  </div>
+</section>
+
+${wave(true)}
+
+<section class="section--dark ev-cta" aria-labelledby="ev-cta-title">
+  <div class="container">
+    <h2 id="ev-cta-title" class="type-h3">${esc(ev.ctaHeading)}</h2>
+    <p>${linkPhones(ev.ctaText)}</p>
+    ${button('Request Service', '/contact-us')}
+  </div>
+</section>`;
+
+  return renderPage({
+    title: ev.title,
+    description: ev.description,
+    path: `/${ev.slug}`,
+    bodyClass: 'page-ev',
+    content,
+    jsonLd: [
+      {
+        '@context': 'https://schema.org',
+        '@type': 'Service',
+        name: 'Tesla and EV Charger Installation',
+        serviceType: 'EV charger installation',
+        description: ev.description,
+        url: `${site.url}/${ev.slug}/`,
+        areaServed: 'Memphis Metro Area, TN',
+        provider: { '@id': site.url },
+      },
+      {
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        mainEntity: ev.faqs.map((f) => ({
+          '@type': 'Question',
+          name: f.q,
+          acceptedAnswer: { '@type': 'Answer', text: f.a },
+        })),
+      },
+    ],
+  });
+}
+
 /* ---------- 404 ---------- */
 
 function notFound() {
@@ -474,4 +629,4 @@ function notFound() {
   });
 }
 
-module.exports = { home, service, areasIndex, area, faq, contact, policy, post, notFound };
+module.exports = { home, service, areasIndex, area, faq, contact, policy, post, evCharging, notFound };

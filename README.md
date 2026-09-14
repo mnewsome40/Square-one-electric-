@@ -4,12 +4,13 @@ Static rebuild of [squareonememphis.com](https://www.squareonememphis.com/) for 
 
 ## What's included
 
-All 23 public pages of the original site, at the same URLs:
+All 23 public pages of the original site, at the same URLs, plus one new page:
 
 | Section | Pages |
 | --- | --- |
 | Home | `/` |
 | Services | `/home-inspection-corrections`, `/aluminum-wire-mediation`, `/lighting-refreshers`, `/ev-chargers-installation`, `/industrial-equipment-connections`, `/general-repair-and-diagnosis` |
+| Tesla & EV charging | `/ev-tesla-charger-installation` (**new**, not on the original site) |
 | Areas | `/areas-we-serve` plus `/service-areas/{memphis,germantown,collierville,millington,arlington,bartlett}-tn` |
 | FAQs | `/resources` |
 | Contact | `/contact-us` (Jobber work-request form embed) |
@@ -36,6 +37,7 @@ src/
   data/services.js       Six service pages + home-page service cards
   data/areas.js          Six service-area pages
   data/faqs.js           FAQ questions and answers
+  data/ev.js             Tesla / EV charging page + the EV block on the home page
   data/posts.js          Blog posts (oldest → newest)
   data/policy.js         Policy and T&C page copy
   templates/layout.js    <head>, header/nav, mobile drawer, footer, HTML helpers
@@ -88,6 +90,18 @@ setting, on by default, normalises every request to the trailing-slash form, so
 returns keeps the canonical tags honest and avoids a redirect hop on internal
 navigation. The old non-slash URLs still work and redirect, so existing inbound
 links to the Duda site keep their value.
+
+## The Tesla and EV charging page
+
+`/ev-tesla-charger-installation` is new content, not a rebuild of an existing page. It adds a home-page section and a dedicated page covering Level 2 installs, the Tesla Wall Connector, panel capacity, commercial charging, and six EV-specific FAQs. All copy lives in `src/data/ev.js`.
+
+Everything the page claims about Square One Electric is a claim the site already makes elsewhere: Level 1 and Level 2 installs, residential and commercial work, code-compliant wiring and panel upgrades, free estimates, licensed and insured. The technical explanations (NACS and J1772 connectors, load calculations, NEMA 14-50 receptacles, GFCI requirements, load-management devices) are general EV-charging facts rather than descriptions of a proprietary process.
+
+**Before this goes to the client, three things are worth confirming:**
+
+1. **The photos.** The five EV images in `src/assets/images/` (filenames beginning `ev-`) are retouched marketing photographs supplied for this page. The underlying installation is real, but surfaces, reflections, and small details were reconstructed during retouching. The captions describe what is in the frame and do not claim the work as Square One Electric's own. If the client wants them presented as their own completed jobs, that is their call to make.
+2. **Permits.** The FAQ says permit requirements vary by city and county and invites the customer to ask. If Square One Electric pulls permits as part of the job, saying so directly would be stronger.
+3. **Two pages now target EV charger installation.** The original `/ev-chargers-installation` service page and the older blog post `/professional-ev-charger-installation-services-in-bartlett-tn` both cover the same ground. The new page is written around Tesla and Level 2 specifics to keep them distinct, and the service page links to it, but consolidating the three into one page would be the cleaner long-term answer if the client wants to rank for these terms.
 
 ## Notes for the site owner
 

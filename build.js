@@ -14,6 +14,7 @@ const site = require('./src/data/site');
 const services = require('./src/data/services');
 const areas = require('./src/data/areas');
 const faqs = require('./src/data/faqs');
+const ev = require('./src/data/ev');
 const posts = require('./src/data/posts');
 const policy = require('./src/data/policy');
 const pages = require('./src/templates/pages');
@@ -48,13 +49,14 @@ function build() {
     routes.push({ path: urlPath, html, lastmod, priority });
 
   // Home
-  add('/', pages.home({ services }));
+  add('/', pages.home({ services, ev }));
 
   // Services
   for (const s of services) add(`/${s.slug}`, pages.service(s));
 
   // Areas
-  add('/areas-we-serve', pages.areasIndex({ areas }));
+  add(`/${ev.slug}`, pages.evCharging(ev));
+add('/areas-we-serve', pages.areasIndex({ areas }));
   for (const a of areas) add(`/service-areas/${a.slug}`, pages.area(a));
 
   // FAQ, Contact, Policy

@@ -1223,12 +1223,17 @@ h6 {
   transform: translateY(-50%) rotate(180deg);
 }
 
-.faq-item h2 {
+.faq-item h2,
+.faq-item h3 {
   margin: 0;
   font-weight: 700;
   text-transform: uppercase;
   font-size: clamp(20px, 2.4vw, 30px);
   line-height: 1.2;
+}
+
+.faq-item h3 {
+  font-size: clamp(18px, 1.9vw, 24px);
 }
 
 .faq-item .faq-answer {
@@ -1237,6 +1242,185 @@ h6 {
 
 .faq-item .faq-answer p {
   margin: 0;
+}
+
+/* ---------- Home: Tesla / EV highlight ---------- */
+.ev-highlight {
+  padding: 70px var(--gutter) 80px;
+}
+
+.ev-highlight .container {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 50px;
+  align-items: center;
+}
+
+.ev-highlight__text .type-h3 {
+  margin: 0 0 10px;
+}
+
+.ev-highlight__text .type-h4 {
+  margin: 0 0 20px;
+  color: var(--red);
+}
+
+.ev-highlight__text p {
+  margin: 0 0 18px;
+}
+
+.ev-highlight__image img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+/* ---------- EV / Tesla page ---------- */
+.ev-steps {
+  padding: 70px var(--gutter) 80px;
+}
+
+.ev-steps .type-h3 {
+  margin: 0 0 12px;
+}
+
+.ev-steps__intro {
+  max-width: 70ch;
+  margin: 0 0 30px;
+}
+
+.ev-step-list {
+  counter-reset: ev-step;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 18px;
+  max-width: 90ch;
+}
+
+.ev-step-list li {
+  counter-increment: ev-step;
+  position: relative;
+  padding: 0 0 0 58px;
+  min-height: 40px;
+}
+
+.ev-step-list li::before {
+  content: counter(ev-step);
+  position: absolute;
+  left: 0;
+  top: -2px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--red);
+  color: var(--white);
+  font-family: var(--font-head);
+  font-size: 20px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ev-equipment,
+.ev-panel {
+  padding: 70px var(--gutter) 10px;
+}
+
+.ev-panel {
+  padding-bottom: 70px;
+}
+
+.ev-equipment .type-h3,
+.ev-panel .type-h3 {
+  margin: 0 0 16px;
+}
+
+.ev-panel .type-h3 + p,
+.ev-panel h2.type-h3 {
+  margin-top: 0;
+}
+
+.ev-panel h2.type-h3:not(:first-child) {
+  margin-top: 44px;
+}
+
+.ev-list {
+  list-style: none;
+  margin: 0 0 10px;
+  padding: 0;
+  display: grid;
+  gap: 16px;
+}
+
+.ev-list li {
+  padding: 16px 20px;
+  background: var(--gray-100);
+  border-left: 4px solid var(--red);
+  border-radius: 2px;
+}
+
+.ev-gallery {
+  padding: 40px var(--gutter) 20px;
+}
+
+.ev-gallery .type-h3 {
+  margin: 0 0 24px;
+}
+
+.ev-gallery__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  align-items: start;
+}
+
+.ev-figure {
+  margin: 0;
+}
+
+.ev-figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.ev-figure figcaption {
+  margin-top: 12px;
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.ev-faq {
+  padding: 40px var(--gutter) 70px;
+}
+
+.ev-faq .type-h3 {
+  margin: 0 0 24px;
+}
+
+.ev-faq .faq-list {
+  margin: 0;
+}
+
+.ev-cta {
+  padding: 60px var(--gutter) 70px;
+  text-align: center;
+}
+
+.ev-cta .type-h3 {
+  margin: 0 0 14px;
+}
+
+.ev-cta p {
+  max-width: 70ch;
+  margin: 0 auto 26px;
 }
 
 /* ---------- Areas We Serve page ---------- */
@@ -1485,7 +1669,32 @@ h6 {
   }
 }
 
+@media (max-width: 1024px) {
+  .ev-highlight .container {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .ev-gallery__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
 @media (max-width: 768px) {
+  .ev-gallery__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .ev-highlight,
+  .ev-steps,
+  .ev-equipment,
+  .ev-panel,
+  .ev-faq,
+  .ev-cta {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
   .hero {
     padding: 50px 20px 80px;
     border-radius: 0;

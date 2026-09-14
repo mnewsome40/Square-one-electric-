@@ -58,6 +58,7 @@ module.exports = {
         { label: 'Aluminum Wire Mediation', href: '/aluminum-wire-mediation' },
         { label: 'Lighting Refreshers', href: '/lighting-refreshers' },
         { label: 'EV Chargers Installation', href: '/ev-chargers-installation' },
+        { label: 'Tesla & EV Charging', href: '/ev-tesla-charger-installation' },
         { label: 'Industrial Equipment Connections', href: '/industrial-equipment-connections' },
         { label: 'General Repair and Diagnosis', href: '/general-repair-and-diagnosis' },
       ],
