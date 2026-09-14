@@ -72,6 +72,12 @@ function icon(name, extraClass = '') {
 const CHEVRON =
   '<svg class="chevron" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>';
 
+const PHONE_ICON =
+  '<svg class="cta-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>';
+
+const MAIL_ICON =
+  '<svg class="cta-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/><path d="m22 6-10 7L2 6"/></svg>';
+
 const HAMBURGER =
   '<svg aria-hidden="true" viewBox="0 0 100 100"><path d="M77.1 34.3H44.2a2.5 2.5 0 0 1 0-5h32.9a2.5 2.5 0 0 1 0 5zM36.3 34.3H22.9a2.5 2.5 0 0 1 0-5h13.4a2.5 2.5 0 0 1 0 5zM77.1 52.4H22.9a2.5 2.5 0 0 1 0-5h54.2a2.5 2.5 0 0 1 0 5zM77.1 70.6H55.8a2.5 2.5 0 0 1 0-5h21.3a2.5 2.5 0 0 1 0 5zM47.9 70.6H22.9a2.5 2.5 0 0 1 0-5h25a2.5 2.5 0 0 1 0 5z"/></svg>';
 
@@ -118,7 +124,10 @@ function header(currentPath) {
     <nav class="main-nav" aria-label="Main navigation">
       ${navList(currentPath)}
     </nav>
-    <a class="btn btn--phone" href="${site.phoneHref}">${site.phoneHtml}</a>
+    <div class="header-cta">
+      <a class="btn btn--header btn--phone" href="${site.phoneHref}" aria-label="Call ${esc(site.name)} at ${esc(site.phone)}">${PHONE_ICON}<span class="cta-label">${site.phoneHtml}</span></a>
+      <a class="btn btn--header btn--outline header-contact" href="/contact-us">${MAIL_ICON}<span class="cta-label">Contact Us</span></a>
+    </div>
     <button class="nav-toggle" type="button" aria-label="Open menu" aria-controls="mobile-drawer" aria-expanded="false">${HAMBURGER}</button>
   </div>
 </header>
@@ -128,7 +137,10 @@ function header(currentPath) {
   <nav aria-label="Mobile navigation">
     ${navList(currentPath, { drawer: true })}
   </nav>
-  <a class="btn" href="${site.phoneHref}">${site.phoneHtml}</a>
+  <div class="drawer-cta">
+    <a class="btn" href="${site.phoneHref}" aria-label="Call ${esc(site.name)} at ${esc(site.phone)}">${PHONE_ICON}<span>${site.phoneHtml}</span></a>
+    <a class="btn btn--outline" href="/contact-us">${MAIL_ICON}<span>Contact Us</span></a>
+  </div>
 </aside>`;
 }
 

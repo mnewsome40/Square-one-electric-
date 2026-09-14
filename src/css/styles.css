@@ -429,11 +429,49 @@ h6 {
   padding: 8px 22px;
 }
 
+/* Outlined counterpart to .btn, for the secondary CTA in a pair. */
+.btn--outline {
+  background: transparent;
+  color: var(--dark);
+  border-color: var(--dark);
+}
+
+.btn--outline:hover,
+.btn--outline:focus-visible {
+  background: var(--dark);
+  color: var(--white);
+}
+
+/* Compact sizing for the two header CTAs. */
+.btn--header {
+  min-width: 0;
+  min-height: 46px;
+  padding: 10px 18px;
+  font-size: 15px;
+  white-space: nowrap;
+}
+
+.cta-icon {
+  width: 18px;
+  height: 18px;
+  flex: none;
+}
+
 .btn--phone {
   min-width: 220px;
   min-height: 50px;
   font-size: 15px;
   white-space: nowrap;
+}
+
+.header-cta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.header-cta .btn--phone {
+  min-width: 0;
 }
 
 .section--dark .btn:hover,
@@ -655,9 +693,15 @@ h6 {
   display: block;
 }
 
+.drawer-cta {
+  display: grid;
+  gap: 12px;
+  margin-top: 24px;
+}
+
 .mobile-drawer .btn {
   width: 100%;
-  margin-top: 24px;
+  min-width: 0;
 }
 
 /* ---------- Home hero ---------- */
@@ -1609,6 +1653,38 @@ h6 {
 }
 
 /* ---------- Responsive ---------- */
+/* Just above the mobile breakpoint the full nav, both CTAs and the logo are
+   wider than the bar. Tightening the nav buys back part of it; below 1070px
+   the phone also drops to its icon. The tel: link is unchanged either way,
+   only the number text is hidden. */
+@media (min-width: 1025px) and (max-width: 1120px) {
+  .nav-link {
+    padding: 10px 5px;
+    font-size: 14px;
+  }
+
+  .header-cta {
+    gap: 6px;
+  }
+
+  .header-cta .btn--header {
+    padding: 10px 12px;
+    font-size: 14px;
+  }
+
+}
+
+@media (min-width: 1025px) and (max-width: 1069px) {
+  .header-cta .btn--phone {
+    width: 44px;
+    padding: 10px;
+  }
+
+  .header-cta .btn--phone .cta-label {
+    display: none;
+  }
+}
+
 @media (max-width: 1200px) {
   .nav-link {
     padding: 10px 7px;
@@ -1618,6 +1694,19 @@ h6 {
   .btn--phone {
     min-width: 190px;
   }
+
+  .header-cta {
+    gap: 8px;
+  }
+
+  .header-cta .btn--header {
+    padding: 10px 13px;
+    font-size: 14px;
+  }
+
+  .header-contact .cta-icon {
+    display: none;
+  }
 }
 
 @media (max-width: 1024px) {
@@ -1625,8 +1714,35 @@ h6 {
     --header-h: 90px;
   }
 
-  .main-nav,
-  .header-inner > .btn--phone {
+  .main-nav {
+    display: none;
+  }
+
+  .header-cta {
+    gap: 8px;
+    margin-left: auto;
+  }
+
+  .header-cta .btn--header {
+    min-height: 44px;
+    padding: 10px 14px;
+  }
+
+  .header-cta .btn--phone {
+    width: 44px;
+    padding: 10px;
+  }
+
+  .header-cta .btn--phone .cta-label {
+    display: none;
+  }
+
+  .header-cta .cta-icon {
+    width: 20px;
+    height: 20px;
+  }
+
+  .header-contact .cta-icon {
     display: none;
   }
 
@@ -1817,7 +1933,25 @@ h6 {
   }
 }
 
+/* Narrowest phones only: the logo, both CTAs and the menu button no longer
+   fit with a text label, so Contact collapses to its icon like the phone. */
+@media (max-width: 359px) {
+  .header-contact {
+    width: 44px;
+    padding: 10px;
+  }
+
+  .header-contact .cta-icon {
+    display: block;
+  }
+
+  .header-contact .cta-label {
+    display: none;
+  }
+}
+
 @media (max-width: 420px) {
+
   .brand img {
     height: 60px;
   }
